@@ -26,7 +26,13 @@ export async function POST(req) {
 
     const token = signJWT({ userId: user.id });
 
-    return Response.json({ token });
+    return new Response(JSON.stringify({ success: true }), {
+  status: 200,
+  headers: {
+    'Set-Cookie': `token=${token}; HttpOnly; Path=/; SameSite=Strict`,
+    'Content-Type': 'application/json',
+  },
+});
   } catch (err) {
     console.error(err);
     return Response.json({ error: 'Server error' }, { status: 500 });
