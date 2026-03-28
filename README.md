@@ -40,6 +40,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Add middleware protection
 
 
+If deploying, you may need to add "build": "prisma generate && next build", to the package.json
+
 TECH
 
 - Prisma (not neon)
