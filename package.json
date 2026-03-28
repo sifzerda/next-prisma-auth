@@ -10,23 +10,28 @@
     "test": "jest"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.11.1",
+    "@prisma/adapter-pg": "^7.6.0",
     "@prisma/client": "^7.6.0",
     "bcrypt": "^6.0.0",
     "jsonwebtoken": "^9.0.3",
     "next": "16.2.1",
-    "prisma": "^7.6.0",
+    "pg": "^8.20.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.29.2",
+    "@jest/globals": "^30.3.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/react": "^16.3.2",
     "@types/jest": "^30.0.0",
     "babel-jest": "^30.3.0",
+    "dotenv": "^17.3.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
     "jest": "^30.3.0",
+    "prisma": "^7.6.0",
     "supertest": "^7.2.2",
     "tailwindcss": "^4"
   }

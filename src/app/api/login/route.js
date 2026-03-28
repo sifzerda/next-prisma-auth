@@ -4,48 +4,31 @@ import { signJWT } from '../../../lib/auth';
 
 export async function POST(req) {
   try {
-    const { email, password, username } = await req.json();
+    const { email, password } = await req.json();
 
-    // Validate input
-    if (!email || !password || !username) {
-      return Response.json(
-        { error: 'Missing fields' },
-        { status: 400 }
-      );
+    if (!email || !password) {
+      return Response.json({ error: 'Missing fields' }, { status: 400 });
     }
 
-    // Check if user exists
-    const existingUser = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email },
     });
 
-    if (existingUser) {
-      return Response.json(
-        { error: 'User already exists' },
-        { status: 400 }
-      );
+    if (!user) {
+      return Response.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const valid = await bcrypt.compare(password, user.password);
 
-    // Create user
-    const user = await prisma.user.create({
-      data: {
-        email,
-        username,
-        password: hashedPassword,
-      },
-    });
+    if (!valid) {
+      return Response.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
 
-    // Create JWT
     const token = signJWT({ userId: user.id });
 
     return Response.json({ token });
   } catch (err) {
-    return Response.json(
-      { error: 'Server error' },
-      { status: 500 }
-    );
+    console.error(err);
+    return Response.json({ error: 'Server error' }, { status: 500 });
   }
 }

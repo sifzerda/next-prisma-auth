@@ -1,8 +1,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  engineType = "client"
-  output   = "../src/generated/prisma"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -10,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   email     String   @unique
   username  String
   password  String
