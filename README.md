@@ -51,5 +51,5 @@ TECH
 
 - Prisma (not neon)
 - Auth
-- Jest
+- Jest: testing auth routes GET and POST
 - JWT (may change to HTTP cookies)
